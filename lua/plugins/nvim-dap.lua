@@ -9,8 +9,6 @@ return {
         },
         config = function()
             local dap, dapui = require "dap", require "dapui"
-            local dap_python = require "dap-python"
-
             require("dapui").setup {}
             require("nvim-dap-virtual-text").setup {
                 commented = true, -- Show virtual text alongside comment
@@ -36,7 +34,6 @@ return {
                 numhl = "DiagnosticSignWarn",
             })
 
-            dap_python.setup "python"
             dap.listeners.before.attach.dapui_config = function()
                 dapui.open()
             end
