@@ -10,8 +10,10 @@ map("n", "<leader>ih", function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, { desc = "Toggle Inlay Hints" })
 map("n", "<leader>gf", vim.lsp.buf.format, {})
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
+-- Terimal key mappings
+map("t", "<Esc>", [[<C-x>]], { desc = "Move from Terimal Insert to Normal", noremap = true, silent = true })
 -- DAP key mappings
 map("n", "<Leader>db", function()
     require("dap").toggle_breakpoint()
@@ -33,21 +35,45 @@ map("n", "<leader>dO", function()
     require("dap").step_out()
 end, { desc = "Debug Step_Out" })
 
---     vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
---     vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
---     vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
---     vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
---     vim.keymap.set({'n', 'v'}, '<Leader>dh', function()
---       require('dap.ui.widgets').hover()
---     end)
---     vim.keymap.set({'n', 'v'}, '<Leader>dp', function()
---       require('dap.ui.widgets').preview()
---     end)
---     vim.keymap.set('n', '<Leader>df', function()
---       local widgets = require('dap.ui.widgets')
---       widgets.centered_float(widgets.frames)
---     end)
---     vim.keymap.set('n', '<Leader>ds', function()
---       local widgets = require('dap.ui.widgets')
---       widgets.centered_float(widgets.scopes)
---     end)
+map("n", "<leader>rf", function()
+    require("nvchad.term").runner {
+        id = "boo",
+        pos = "sp",
+        cmd = function()
+            local file = vim.fn.expand "%"
+            local filename_no_ext = vim.fn.fnamemodify(file, ":r")
+
+            -- Define file type commands
+            local ft_cmds = {
+                python = "python " .. file,
+                javascript = "node " .. file,
+                cpp = "clear && g++ -o out " .. file .. " && ./out",
+                java = "clear && javac " .. file .. " && java " .. filename_no_ext,
+            }
+
+            -- Get the current buffer's file type
+            local filetype = vim.bo.filetype
+
+            -- Run the appropriate command
+            return ft_cmds[filetype] or "echo 'Unsupported file type'"
+        end,
+    }
+end, { desc = "Exceute/Run file" })
+
+-- Keyboard users
+map("n", "<leader>om", function()
+    require("menu").open "default"
+end, { desc = "Open Menu" })
+
+-- mouse users + nvimtree users!
+map({ "n", "v" }, "<RightMouse>", function()
+    require("menu.utils").delete_old_menus()
+
+    vim.cmd.exec '"normal! \\<RightMouse>"'
+
+    -- clicked buf
+    local buf = vim.api.nvim_win_get_buf(vim.fn.getmousepos().winid)
+    local options = vim.bo[buf].ft == "NvimTree" and "nvimtree" or "default"
+
+    require("menu").open(options, { mouse = true })
+end, {})

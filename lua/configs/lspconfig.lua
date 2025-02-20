@@ -41,7 +41,7 @@ for _, lsp in ipairs(servers) do
 
             -- Inlay hint
             if client.server_capabilities.inlayHintProvider then
-                vim.lsp.inlay_hint(true, { bufnr })
+                vim.lsp.inlay_hint.enable(true, {bufnr})
             end
         end,
         on_init = nvlsp.on_init,

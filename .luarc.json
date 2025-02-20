@@ -1,6 +1,10 @@
 {
     "diagnostics.globals": [
         "vim",
-        "inlayhint"
+        "inlayhint",
+        "c_base"
+    ],
+    "diagnostics.disable": [
+        "unused-vararg"
     ]
 }
