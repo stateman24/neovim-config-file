@@ -3,10 +3,11 @@
 -- Please read that file to know all available options :( 
 
 ---@type ChadrcConfig
+---@class statusline
 local M = {}
 
 M.base46 = {
-	theme = "oxocarbon",
+	theme = "carbonfox",
 
 	-- hl_override = {
 	-- 	Comment = { italic = true },
@@ -16,21 +17,30 @@ M.base46 = {
 
 M.nvdash = {
   load_on_startup = true,
-header = {
-      " ███████╗████████╗ █████╗ ████████╗ ███╗   ███╗ █████╗ ███╗   ██╗ ",
-      " ██╔════╝╚══██╔══╝██╔══██╗╚══██╔══╝ ████╗ ████║██╔══██╗████╗  ██║ ",
-      " █████╗     ██║   ███████║   ██║    ██╔████╔██║███████║██╔██╗ ██║ ",
-      " ██╔══╝     ██║   ██╔══██║   ██║    ██║╚██╔╝██║██╔══██║██║╚██╗██║ ",
-      " ███████╗   ██║   ██║  ██║   ██║    ██║ ╚═╝ ██║██║  ██║██║ ╚████║ ",
-      " ╚══════╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝    ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝ ",
-      "                                                                  ",
-      "                  S  T  A  T  E  M  A  N    V  I  M               ",
-      "                                                                  ",
-    }}
+header = 
+{
+       "                            ",
+       "     ▄▄         ▄ ▄▄▄▄▄▄▄   ",
+       "   ▄▀███▄     ▄██ █████▀    ",
+       "   ██▄▀███▄   ███           ",
+       "   ███  ▀███▄ ███           ",
+       "   ███    ▀██ ███           ",
+       "   ███      ▀ ███           ",
+       "   ▀██ █████▄▀█▀▄██████▄    ",
+       "     ▀ ▀▀▀▀▀▀▀ ▀▀▀▀▀▀▀▀▀▀   ",
+       "                            ",
+       "     Powered By  eovim    ",
+       "                            ",
+     },
 
-
-
-
-
+}
+M.statusline = {
+       theme = "minimal", -- default/vscode/vscode_colored/minimal
+       -- default/round/block/arrow separators work only for default statusline theme
+       -- round and block will work for minimal theme only
+       separator_style = "arrow",
+       order = nil,
+       modules = nil,
+     }
 
 return M
