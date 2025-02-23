@@ -5,7 +5,12 @@ require "nvchad.options"
 -- local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
 
-vim.opt.shell = "powershell"
+-- vim.opt.shell = "powershell"
+
+vim.opt.tabstop = 4      -- Number of spaces a tab counts for
+vim.opt.shiftwidth = 4   -- Number of spaces for indentation
+vim.opt.expandtab = true -- Convert tabs to spaces
+vim.opt.termguicolors = true
 
 local enable_providers = {
     "python3_provider",

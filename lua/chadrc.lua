@@ -1,5 +1,4 @@
 local options = {
-
     base46 = {
         theme = "catppuccin", -- default theme
         hl_add = {},
@@ -113,6 +112,8 @@ local options = {
         virt_text = "󱓻 ",
         highlight = { hex = true, lspvars = true },
     },
+
+    
 }
 
 local status, chadrc = pcall(require, "chadrc")
