@@ -25,11 +25,12 @@ local options = {
 
         statusline = {
             enabled = true,
-            theme = "minimal", -- default/vscode/vscode_colored/minimal
+            theme = "default", -- default/vscode/vscode_colored/minimal
             -- default/round/block/arrow separators work only for default statusline theme
             -- round and block will work for minimal theme only
-            separator_style = "default",
+            separator_style = "block",
             order = nil,
+
             modules = nil,
         },
 
@@ -112,8 +113,6 @@ local options = {
         virt_text = "󱓻 ",
         highlight = { hex = true, lspvars = true },
     },
-
-    
 }
 
 local status, chadrc = pcall(require, "chadrc")
